@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   jeecg-boot-mysql:
     build:
@@ -17,15 +17,17 @@ services:
       --lower_case_table_names=1
       --max_allowed_packet=128M
       --default-authentication-plugin=caching_sha2_password
-    ports:
-      - 3306:3306
+    #ports:
+    #  - 3306:3306
+    volumes:
+      - /data/workspace/youweilink/mysql-data:/var/lib/mysql
     networks:
       - jeecg-boot
 
   jeecg-boot-redis:
     image: registry.cn-hangzhou.aliyuncs.com/jeecgdocker/redis:5.0
-    ports:
-      - 6379:6379
+    #ports:
+    #  - 6379:6379
     restart: always
     hostname: jeecg-boot-redis
     container_name: jeecg-boot-redis
@@ -56,8 +58,8 @@ services:
     networks:
       - jeecg-boot
     ports:
-      - 80:80
+      - 280:80
 
 networks:
   jeecg-boot:
-    name: jeecg_boot
+    #name: jeecg_boot
